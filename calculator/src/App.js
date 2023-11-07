@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import './style.css';
+import Opcao from './components'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    return (
+        <body>
+
+          <div className="container">
+              <h1>JOGO DA VELHA</h1>
+          </div>
+
+          <div className='tabuleiro'>
+              <Opcao/>
+              <div id="caixa_2" className='caixa_2'></div>
+              <div id="caixa_3" className='caixa_3'></div>
+              <div id="caixa_4" className='caixa_4'></div>
+              <div id="caixa_5" className='caixa_5'></div>
+              <div id="caixa_6" className='caixa_6'></div>
+              <div id="caixa" className='caixa_7'></div>
+              <div id="caixa" className='caixa_8'></div>
+              <div id="caixa" className='caixa_9'></div>
+          </div>
+
+        </body>
   );
 }
 

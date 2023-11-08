@@ -1,0 +1,13 @@
+
+*{
+    background-color: white;
+}
+.vazio{
+    background-color: white;
+}
+.player1{
+    background-color: rgb(4, 187, 248)
+}
+.player2{
+    background-color: rgb(255, 60, 0);
+}

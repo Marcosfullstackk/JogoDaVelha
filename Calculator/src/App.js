@@ -16,13 +16,19 @@ function App() {
     ]);
    const [jogador, setJogador] = useState (1);
 
-   function aoClicar(){
+    alert(`Vez do jogador ${jogador}`)
+
+   function aoClicar(index){
     if(jogador === 1){
      setJogador (2);
+     //setValores
+     // valores[index] = 1
+     console.log(jogador)
     }
     else if(jogador === 2){
-      setJogador(1) ;
-
+      setJogador(1);
+      console.log(jogador)
+      // valores[index] = 2
     }
 
 
@@ -38,7 +44,7 @@ function App() {
       <section className='tabuleiro'>
           {valores.map( (item, index) => {
             return (
-              <Opcao  aoClicar={() => aoClicar(index)} item={item} index={index} />
+              <Opcao  aoClicar={aoClicar} item={item} index={index} />
             );
           })}
       </section>

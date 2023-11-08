@@ -2,6 +2,9 @@
 *{
     background-color: white;
 }
+section{
+    cursor: pointer;
+}
 .vazio{
     background-color: white;
 }

@@ -5,4 +5,3 @@ export default function Opcao (props){
         <section onClick={() => props.aoClicar(props.index)} id={props.index} className={props.item.valor} />
     );
 }   
-  

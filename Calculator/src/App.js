@@ -1,55 +1,65 @@
 import './App.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Opcao from './components/opcao/Opcao';
 
 function App() {
-  let player1;
-  let player2;
+  const jogo = [
+    { "valor": "vazio" },
+    { "valor": "vazio" },
+    { "valor": "vazio" },
+    { "valor": "vazio" },
+    { "valor": "vazio" },
+    { "valor": "vazio" },
+    { "valor": "vazio" },
+    { "valor": "vazio" },
+    { "valor": "vazio" }
+  ];
 
-    const [valores, setValores] = useState ([
-        {"valor": "vazio"},
-        {"valor": "vazio"},
-        {"valor": "vazio"},
-        {"valor": "vazio"},
-        {"valor": "vazio"},
-        {"valor": "vazio"},
-        {"valor": "vazio"},
-        {"valor": "vazio"},
-        {"valor": "vazio"}
-    ]);
+  const [valores, setValores] = useState(jogo);
+  const [jogador, setJogador] = useState(1);
 
+  
+
+
+  useEffect(() => {
     
-    const [jogador, setJogador] = useState (1);
+    const timeoutId = setTimeout(() => {
+      verificaVitoria(valores);
+    }, 100);
+    return () => clearTimeout(timeoutId);
+  }, [valores]);
 
-    async function jogada (jogador, temp) {
-      setValores(temp);
-      setJogador(jogador);
-    }
-    
+  function recomecar() {
+    setValores(jogo);
+    setJogador(1);
+ 
+}
+
+  function jogada (jogador, temp) {
+    setValores(temp);
+    setJogador(jogador);
+  }
+  
     function verificaVitoria(valores){
-      const linhas = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],  
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],  
-        [0, 4, 8], [2, 4, 6]
-      ] 
-      const isBoardFull = valores.every(item => item.valor !== "vazio");
-      if(
-        (valores[0].valor === 'player1') && (valores[1].valor === 'player1') && (valores[2].valor === 'player1') ||
-        (valores[0].valor === 'player1') && (valores[3].valor === 'player1') && (valores[6].valor === 'player1') ||
-        (valores[0].valor === 'player1') && (valores[4].valor === 'player1') && (valores[8].valor === 'player1') ||
-        (valores[3].valor === 'player1') && (valores[4].valor === 'player1') && (valores[5].valor === 'player1') ||
-        (valores[1].valor === 'player1') && (valores[4].valor === 'player1') && (valores[7].valor === 'player1') ||
-        (valores[2].valor === 'player1') && (valores[4].valor === 'player1') && (valores[6].valor === 'player1') ||
-        (valores[6].valor === 'player1') && (valores[7].valor === 'player1') && (valores[8].valor === 'player1') ||
-        (valores[2].valor === 'player1') && (valores[5].valor === 'player1') && (valores[8].valor === 'player1')){
+    const linhas = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],  
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],  
+      [0, 4, 8], [2, 4, 6]
+    ] 
+    const isBoardFull = valores.every(item => item.valor !== "vazio");
+    if(
+      (valores[0].valor === 'player1') && (valores[1].valor === 'player1') && (valores[2].valor === 'player1') ||
+      (valores[0].valor === 'player1') && (valores[3].valor === 'player1') && (valores[6].valor === 'player1') ||
+      (valores[0].valor === 'player1') && (valores[4].valor === 'player1') && (valores[8].valor === 'player1') ||
+      (valores[3].valor === 'player1') && (valores[4].valor === 'player1') && (valores[5].valor === 'player1') ||
+      (valores[1].valor === 'player1') && (valores[4].valor === 'player1') && (valores[7].valor === 'player1') ||
+      (valores[2].valor === 'player1') && (valores[4].valor === 'player1') && (valores[6].valor === 'player1') ||
+      (valores[6].valor === 'player1') && (valores[7].valor === 'player1') && (valores[8].valor === 'player1') ||
+      (valores[2].valor === 'player1') && (valores[5].valor === 'player1') && (valores[8].valor === 'player1')){
         alert(`VOCE GANHOU ALGO NA SUA VIDA, PARABENS`)
         console.log('ganhow')
-        // musica do angry bids
-        
-        //return true;
-        
       }
-
+      
       else if(
         (valores[0].valor === 'player2') && (valores[1].valor === 'player2') && (valores[2].valor === 'player2') ||
         (valores[0].valor === 'player2') && (valores[4].valor === 'player2') && (valores[8].valor === 'player2') ||
@@ -61,28 +71,24 @@ function App() {
         (valores[2].valor === 'player2') && (valores[5].valor === 'player2') && (valores[8].valor === 'player2'))
         {
           alert("VOCE GANHOU ALGO NA SUA VIDA, PARABENS");
-          console.log('ganhow'); 
-
-
-
-         // return true;
+          console.log('ganhow');  
         }
         else if (isBoardFull) {
           alert('VELHA');
           console.log('VELHA');
-        //  return false;
-        //musica do i felling good
+          //  return false;
+          //musica do i felling good
         }
-
+        
       }
       
       //alert parabens fulano
       //declara uma variavel vazio
       //setValores(variavelVazia)
-
-    function aoClicar(index){
       
-      if(valores[index].valor === "player1" || valores[index].valor === "player2"){
+      function aoClicar(index){
+        
+        if(valores[index].valor === "player1" || valores[index].valor === "player2"){
           alert("Nao pode");
         } else {
           if(jogador == 1){
@@ -99,35 +105,30 @@ function App() {
             console.log(`Vez do jogador ${jogador} (2)`);
           }
         }
-        if(verificaVitoria(valores)){
-            
-        }
-    }
-
+        
+      }
+    
     return (
-        <body>
-            
+      <body>
+        
             <section className="container">
                 <h1>JOGO DA VELHA</h1>
             </section>
+          
 
             <section className='tabuleiro'>
                 {valores.map( (item, index) => {
-                return (
-                  <Opcao aoClicar={aoClicar} item={item} index={index}  />
-                );
-                })}
+                  return (
+                    <Opcao aoClicar={aoClicar} item={item} index={index}  />
+                    );
+                  })}
             </section>
-
+        <footer>
+          <button onClick={recomecar} className='reset'>Recomeçar</button>
+        </footer>
         </body>
     )
 }
 
 export default App;
 
-// useEffect (
-//   () = {
-
-//   }
-//   [  ]
-// )

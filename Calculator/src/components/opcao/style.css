@@ -1,3 +1,12 @@
+@keyframes piscar{
+    0%, 100%{
+        opacity:1;
+    }
+    50%{
+        opacity:0;
+    }
+    }
+
 
 *{
     background-color: white;
@@ -9,7 +18,8 @@ section{
     background-color: white;
 }
 .player1{
-    background-color: rgb(4, 187, 248)
+    background-color: rgb(4, 187, 248);
+    
 }
 .player2{
     background-color: rgb(255, 60, 0);

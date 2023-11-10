@@ -31,9 +31,7 @@ function App() {
         [0, 1, 2], [3, 4, 5], [6, 7, 8],  
         [0, 3, 6], [1, 4, 7], [2, 5, 8],  
         [0, 4, 8], [2, 4, 6]
-      ]
-
-      
+      ] 
       const isBoardFull = valores.every(item => item.valor !== "vazio");
       if(
         (valores[0].valor === 'player1') && (valores[1].valor === 'player1') && (valores[2].valor === 'player1') ||
@@ -46,7 +44,10 @@ function App() {
         (valores[2].valor === 'player1') && (valores[5].valor === 'player1') && (valores[8].valor === 'player1')){
         alert(`VOCE GANHOU ALGO NA SUA VIDA, PARABENS`)
         console.log('ganhow')
+        // musica do angry bids
+        
         //return true;
+        
       }
 
       else if(
@@ -63,12 +64,14 @@ function App() {
           console.log('ganhow'); 
 
 
+
          // return true;
         }
         else if (isBoardFull) {
           alert('VELHA');
           console.log('VELHA');
         //  return false;
+        //musica do i felling good
         }
 
       }
@@ -121,3 +124,10 @@ function App() {
 }
 
 export default App;
+
+// useEffect (
+//   () = {
+
+//   }
+//   [  ]
+// )

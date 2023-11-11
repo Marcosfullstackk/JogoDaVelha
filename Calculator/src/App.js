@@ -17,24 +17,15 @@ function App() {
 
   const [valores, setValores] = useState(jogo);
   const [jogador, setJogador] = useState(1);
+  const [podeJogar, setPodeJogar] = useState(true);
 
   
-
-
-  useEffect(() => {
-    
-    const timeoutId = setTimeout(() => {
-      verificaVitoria(valores);
-    }, 100);
-    return () => clearTimeout(timeoutId);
-  }, [valores]);
 
   function recomecar() {
     setValores(jogo);
     setJogador(1);
- 
+    setPodeJogar(true);
 }
-
   function jogada (jogador, temp) {
     setValores(temp);
     setJogador(jogador);
@@ -56,6 +47,7 @@ function App() {
       (valores[2].valor === 'player1') && (valores[4].valor === 'player1') && (valores[6].valor === 'player1') ||
       (valores[6].valor === 'player1') && (valores[7].valor === 'player1') && (valores[8].valor === 'player1') ||
       (valores[2].valor === 'player1') && (valores[5].valor === 'player1') && (valores[8].valor === 'player1')){
+        setPodeJogar(false);
         alert(`VOCE GANHOU ALGO NA SUA VIDA, PARABENS`)
         console.log('ganhow')
       }
@@ -70,6 +62,7 @@ function App() {
         (valores[6].valor === 'player2') && (valores[7].valor === 'player2') && (valores[8].valor === 'player2') ||
         (valores[2].valor === 'player2') && (valores[5].valor === 'player2') && (valores[8].valor === 'player2'))
         {
+          setPodeJogar(false);
           alert("VOCE GANHOU ALGO NA SUA VIDA, PARABENS");
           console.log('ganhow');  
         }
@@ -87,27 +80,38 @@ function App() {
       //setValores(variavelVazia)
       
       function aoClicar(index){
-        
-        if(valores[index].valor === "player1" || valores[index].valor === "player2"){
-          alert("Nao pode");
-        } else {
-          if(jogador == 1){
-            let temp = [...valores];
-            temp[index].valor = "player1";
-            jogada(2, temp);
-            console.log(`Vez do jogador ${jogador} (1)`);
-            
-          }else if(jogador == 2){
-            setJogador(1);
-            let temp = [...valores];
-            temp[index].valor = "player2";
-            jogada(1, temp);
-            console.log(`Vez do jogador ${jogador} (2)`);
+        if(podeJogar){
+          if(valores[index].valor === "player1" || valores[index].valor === "player2"){
+            alert("Nao pode");
+          } else {
+            if(jogador == 1){
+              let temp = [...valores];
+              temp[index].valor = "player1";
+              jogada(2, temp);
+              console.log(`Vez do jogador ${jogador} (1)`);
+              
+            }else if(jogador == 2){
+              setJogador(1);
+              let temp = [...valores];
+              temp[index].valor = "player2";
+              jogada(1, temp);
+              console.log(`Vez do jogador ${jogador} (2)`);
+            }
           }
+        } else {
+          return false;
+
         }
-        
       }
     
+      useEffect(() => {
+    
+        const timeoutId = setTimeout(() => {
+          verificaVitoria(valores);
+        }, 100);
+        return () => clearTimeout(timeoutId);
+      }, [valores]);
+
     return (
       <body>
         

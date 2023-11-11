@@ -18,9 +18,17 @@ section{
     background-color: white;
 }
 .player1{
-    background-color: rgb(4, 187, 248);
-    
+    background-image: url(../../assets/flamengo.png);
+    background-size: cover;
+    transition: 3s;
+    background-position: center;
+    background-size: contain;
+
 }
 .player2{
-    background-color: rgb(255, 60, 0);
+    background-image: url(../../assets/vasco.png);
+    background-size: cover;
+    transition: 3s;
+    background-position: center;
+    
 }

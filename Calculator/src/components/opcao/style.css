@@ -9,11 +9,10 @@
 
 
 *{
-    background-color: white;
+    background-image: url(../../assets/FUT.JPEG) ;
+    background-size: cover;
 }
-section{
-    cursor: pointer;
-}
+
 .vazio{
     background-color: white;
 }
@@ -22,7 +21,7 @@ section{
     background-size: cover;
     transition: 3s;
     background-position: center;
-    background-size: contain;
+    
 
 }
 .player2{
@@ -32,3 +31,5 @@ section{
     background-position: center;
     
 }
+
+

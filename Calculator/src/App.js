@@ -116,7 +116,8 @@ function App() {
       <body>
         
             <section className="container">
-                <h1>JOGO DA VELHA</h1>
+                <h1>JOGO DA VELHA </h1>
+                
             </section>
           
 

@@ -13,8 +13,11 @@
 
 .container h1{
     font-size: 8vh;
-    margin-top: 35px;
+    color: white;
 
+}
+.container h2{
+    color: red;
 }
 
 .tabuleiro{
@@ -25,6 +28,7 @@
     height: 700px;
     margin: auto;
     background-color: black;
+    cursor: pointer;
 }
 
 #caixa{
@@ -36,11 +40,11 @@
 .reset{
 display: flex;
 margin: auto;
-margin-top: 50px;
+margin-top: 30px;
 font-size: 35px;
 background-color: #4caf50;
 color: white;
 padding: 10px;
-
+cursor: pointer;
 
 }

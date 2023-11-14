@@ -1,6 +1,7 @@
 import './App.css'
 import React, { useState, useEffect } from 'react';
-import Opcao from './components/opcao/Opcao';
+import Opcao from './components/opcao/opcao/Opcao';
+import Placar from './components/Placar';
 
 function App() {
   const jogo = [
@@ -18,8 +19,10 @@ function App() {
   const [valores, setValores] = useState(jogo);
   const [jogador, setJogador] = useState(1);
   const [podeJogar, setPodeJogar] = useState(true);
-
-  
+  const [nomeJogador1, setNomeJogador1] = useState('');
+  const [nomeJogador2, setNomeJogador2] = useState('');
+  const [placar1, setPlacar1] = useState (0);
+  const [placar2, setPlacar2] = useState (0);  
 
   function recomecar() {
     setValores(jogo);
@@ -36,43 +39,32 @@ function App() {
       [0, 1, 2], [3, 4, 5], [6, 7, 8],  
       [0, 3, 6], [1, 4, 7], [2, 5, 8],  
       [0, 4, 8], [2, 4, 6]
-    ] 
-    const isBoardFull = valores.every(item => item.valor !== "vazio");
-    if(
-      (valores[0].valor === 'player1') && (valores[1].valor === 'player1') && (valores[2].valor === 'player1') ||
-      (valores[0].valor === 'player1') && (valores[3].valor === 'player1') && (valores[6].valor === 'player1') ||
-      (valores[0].valor === 'player1') && (valores[4].valor === 'player1') && (valores[8].valor === 'player1') ||
-      (valores[3].valor === 'player1') && (valores[4].valor === 'player1') && (valores[5].valor === 'player1') ||
-      (valores[1].valor === 'player1') && (valores[4].valor === 'player1') && (valores[7].valor === 'player1') ||
-      (valores[2].valor === 'player1') && (valores[4].valor === 'player1') && (valores[6].valor === 'player1') ||
-      (valores[6].valor === 'player1') && (valores[7].valor === 'player1') && (valores[8].valor === 'player1') ||
-      (valores[2].valor === 'player1') && (valores[5].valor === 'player1') && (valores[8].valor === 'player1')){
-        setPodeJogar(false);
-        alert(`VOCE GANHOU ALGO NA SUA VIDA, PARABENS`)
-        console.log('ganhow')
-      }
-      
-      else if(
-        (valores[0].valor === 'player2') && (valores[1].valor === 'player2') && (valores[2].valor === 'player2') ||
-        (valores[0].valor === 'player2') && (valores[4].valor === 'player2') && (valores[8].valor === 'player2') ||
-        (valores[3].valor === 'player2') && (valores[4].valor === 'player2') && (valores[5].valor === 'player2') ||
-        (valores[1].valor === 'player2') && (valores[4].valor === 'player2') && (valores[7].valor === 'player2') ||
-        (valores[2].valor === 'player2') && (valores[4].valor === 'player2') && (valores[6].valor === 'player2') ||
-        (valores[0].valor === 'player2') && (valores[3].valor === 'player2') && (valores[6].valor === 'player2') ||
-        (valores[6].valor === 'player2') && (valores[7].valor === 'player2') && (valores[8].valor === 'player2') ||
-        (valores[2].valor === 'player2') && (valores[5].valor === 'player2') && (valores[8].valor === 'player2'))
-        {
+    ];
+
+    for (const linha of linhas) {
+      const [a, b, c] = linha;
+      if (
+          valores[a].valor === valores[b].valor &&
+          valores[b].valor === valores[c].valor &&
+          valores[a].valor !== 'vazio'
+      ) {
+          valores[a].vencedor = true;
+          valores[b].vencedor = true;
+          valores[c].vencedor = true;
           setPodeJogar(false);
-          alert("VOCE GANHOU ALGO NA SUA VIDA, PARABENS");
-          console.log('ganhow');  
-        }
-        else if (isBoardFull) {
+          alert(` ${valores[a].valor === 'player1' ? `Parabens, Vitória do ${nomeJogador1}` : `Parabens, Vitória do ${nomeJogador2}`} `);
+          return;
+      }
+       else if (valores[a].valor != 'player1' && valores[a].valor === 'player2' ) {
           alert('VELHA');
           console.log('VELHA');
           //  return false;
           //musica do i felling good
         }
-        
+    }
+    
+
+      
       }
       
       //alert parabens fulano
@@ -108,32 +100,42 @@ function App() {
     
         const timeoutId = setTimeout(() => {
           verificaVitoria(valores);
-        }, 100);
+        }, 1000);
         return () => clearTimeout(timeoutId);
       }, [valores]);
+
+      
+      useEffect(() => {
+        const nome1 = prompt("Digite o nome do Jogador 1:");
+        const nome2 = prompt("Digite o nome do Jogador 2:");
+      
+        setNomeJogador1(nome1 || "Jogador 1");
+        setNomeJogador2(nome2 || "Jogador 2");
+      }, []);
 
     return (
       <body>
         
-            <section className="container">
-                <h1>JOGO DA VELHA </h1>
-                
-            </section>
-          
+        <section className="container">
+            <h1>JOGO DA VELHA </h1>
+        </section>
 
-            <section className='tabuleiro'>
-                {valores.map( (item, index) => {
-                  return (
-                    <Opcao aoClicar={aoClicar} item={item} index={index}  />
-                    );
-                  })}
-            </section>
+        <Placar player1={nomeJogador1} player2={nomeJogador2} placar1={placar1} placar2={placar2}/>
+          
+        <section className='tabuleiro'>
+            {valores.map( (item, index) => {
+              return (
+                <Opcao aoClicar={aoClicar} item={item} index={index}  />
+                );
+              })}
+        </section>
+
         <footer>
           <button onClick={recomecar} className='reset'>Recomeçar</button>
         </footer>
-        </body>
+
+      </body>
     )
 }
 
-export default App;
-
+    export default App;

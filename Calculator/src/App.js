@@ -41,7 +41,8 @@ function App() {
       [0, 3, 6], [1, 4, 7], [2, 5, 8],  
       [0, 4, 8], [2, 4, 6]
     ];
-
+    let jogoEmpatado = true;
+    
     for (const linha of linhas) {
       const [a, b, c] = linha;
       if (
@@ -56,15 +57,15 @@ function App() {
           alert(` ${valores[a].valor === 'player1' ? `Parabens, Vitória do ${nomeJogador1}` : `Parabens, Vitória do ${nomeJogador2}`} `);
           return;
       } 
-        else if (valores[a].valor != '' && valores[a].valor === 'player2' ) {
-          alert('VELHA');
-          console.log('VELHA');
-          //  return false;
-          //musica do i felling good
+      else if (valores[a].valor === 'vazio' || valores[b].valor === 'vazio' || valores[c].valor === 'vazio') {
+        jogoEmpatado = false;
         }
     }
     
-
+    if (jogoEmpatado) {
+      setPodeJogar(false);
+      alert('VELHA!');
+    }
       
       }
       

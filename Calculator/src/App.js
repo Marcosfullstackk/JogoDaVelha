@@ -1,7 +1,8 @@
 import './App.css'
 import React, { useState, useEffect } from 'react';
 import Opcao from './components/opcao/opcao/Opcao';
-import Placar from './components/Placar';
+import Placar from './components/opcao/placar/Placar';
+
 
 function App() {
   const jogo = [
@@ -54,8 +55,8 @@ function App() {
           setPodeJogar(false);
           alert(` ${valores[a].valor === 'player1' ? `Parabens, Vitória do ${nomeJogador1}` : `Parabens, Vitória do ${nomeJogador2}`} `);
           return;
-      }
-       else if (valores[a].valor != 'player1' && valores[a].valor === 'player2' ) {
+      } 
+        else if (valores[a].valor != '' && valores[a].valor === 'player2' ) {
           alert('VELHA');
           console.log('VELHA');
           //  return false;
@@ -121,7 +122,7 @@ function App() {
         </section>
 
         <Placar player1={nomeJogador1} player2={nomeJogador2} placar1={placar1} placar2={placar2}/>
-          
+        
         <section className='tabuleiro'>
             {valores.map( (item, index) => {
               return (

@@ -9,7 +9,7 @@
 
 
 *{
-    background-image: url(../../assets/FUT.JPEG) ;
+    background-image: url(../../../assets/FUT.JPEG) ;
     background-size: cover;
 }
 
@@ -19,7 +19,7 @@
 
 }
 .player1{
-    background-image: url(../../assets/flamengo.png);
+    background-image: url(../../../assets/flamengo.png);
     background-size: cover;
     transition: 3s;
     background-position: center;
@@ -31,7 +31,7 @@
 
 }
 .player2{
-    background-image: url(../../assets/vasco.png);
+    background-image: url(../../../assets/vasco.png);
     background-size: cover;
     transition: 3s;
     background-position: center;

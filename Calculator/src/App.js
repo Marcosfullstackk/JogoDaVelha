@@ -54,7 +54,29 @@ function App() {
           valores[b].vencedor = true;
           valores[c].vencedor = true;
           setPodeJogar(false);
-          alert(` ${valores[a].valor === 'player1' ? `Parabens, Vitória do ${nomeJogador1}` : `Parabens, Vitória do ${nomeJogador2}`} `);
+
+          
+
+          if ( valores[a].valor === 'player1' ){
+            alert(`Parabens, Vitória do ${nomeJogador1}`);
+            setPlacar1(placar1 + 1);
+          } else if ( valores[a].valor === 'player2' ){
+
+            alert(`Parabens, Vitória do ${nomeJogador2}`);
+            setPlacar2(placar2 + 1);
+
+          }if(placar1 === 2){
+          alert (`Parabens ${nomeJogador1}, voce humilhou o ${nomeJogador2}` )
+          setPlacar1(0);
+          setPlacar2(0);
+        }
+            else if (placar2 === 2){
+              setPlacar2(placar2 + 1); 
+              alert (`Parabens ${nomeJogador2}, voce humilhou o ${nomeJogador1}`)
+              setPlacar2(0);
+              setPlacar1(0);
+            }
+
           return;
       } 
       else if (valores[a].valor === 'vazio' || valores[b].valor === 'vazio' || valores[c].valor === 'vazio') {
@@ -66,6 +88,8 @@ function App() {
       setPodeJogar(false);
       alert('VELHA!');
     }
+
+    
       
       }
       

@@ -1,7 +1,9 @@
 import './App.css'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Opcao from './components/opcao/opcao/Opcao';
 import Placar from './components/opcao/placar/Placar';
+import hino_do_flamengo from './assets/hino-do-flamengo.mp3';
+import hino_vasco from './assets/hino-vasco.mp3';
 
 
 function App() {
@@ -24,6 +26,24 @@ function App() {
   const [nomeJogador2, setNomeJogador2] = useState('');
   const [placar1, setPlacar1] = useState (0);
   const [placar2, setPlacar2] = useState (0);  
+  let emExecucao = false;
+  const audiofla = useRef(hino_do_flamengo);
+  const audiovas = useRef(hino_vasco)
+  const [tempoRestante, setTempoRestante] = useState(20);
+
+function reproduzirAudio(){
+  if(placar1 === 2){
+    audiofla.current.play();
+  }else if(placar2 === 2){
+    audiovas.current.play();
+  }
+}
+
+function cronometro(){
+  for (let i=20; i<=0; i--){
+
+  }
+}
 
   function recomecar() {
     setValores(jogo);
@@ -66,13 +86,15 @@ function App() {
             setPlacar2(placar2 + 1);
 
           }if(placar1 === 2){
-          alert (`Parabens ${nomeJogador1}, voce humilhou o ${nomeJogador2}` )
+          alert (`Parabens ${nomeJogador1}, voce humilhou o ${nomeJogador2}` );
+          reproduzirAudio();
           setPlacar1(0);
           setPlacar2(0);
         }
             else if (placar2 === 2){
               setPlacar2(placar2 + 1); 
               alert (`Parabens ${nomeJogador2}, voce humilhou o ${nomeJogador1}`)
+              reproduzirAudio();
               setPlacar2(0);
               setPlacar1(0);
             }
@@ -141,10 +163,17 @@ function App() {
 
     return (
       <body>
+        <audio  ref={audiofla} src={hino_do_flamengo} type='audio/mp3'></audio>
+        <audio  ref={audiovas} src={hino_vasco} type='audio/mp3'></audio>
         
         <section className="container">
             <h1>JOGO DA VELHA </h1>
         </section>
+
+        <article>
+          <div></div>
+          <p>Tempo Restante: {tempoRestante}s</p>
+        </article>
 
         <Placar player1={nomeJogador1} player2={nomeJogador2} placar1={placar1} placar2={placar2}/>
         

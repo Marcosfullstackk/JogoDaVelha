@@ -46,3 +46,10 @@ padding: 10px;
 cursor: pointer;
 
 }
+
+article{
+    height: 300px;
+    width: 300px;
+    color: white;
+    background-color: yellow;
+}
